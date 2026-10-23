@@ -1,0 +1,154 @@
+/* style.css - Giao diện tùy biến, hỗ trợ hiển thị di động & in ấn đề thi */
+
+@import url('https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700;800;900&display=swap');
+
+:root {
+  --primary-color: #4f46e5;
+  --primary-hover: #4338ca;
+}
+
+body {
+  font-family: 'Be Vietnam Pro', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Tối ưu hóa cảm ứng trên điện thoại */
+button, input, select, textarea {
+  touch-action: manipulation;
+}
+
+/* Thanh cuộn mảnh mượt mà */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(156, 163, 175, 0.4);
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(107, 114, 128, 0.6);
+}
+
+/* Tùy biến công thức KaTeX trên điện thoại để không bị tràn viền */
+.katex-render {
+  overflow-x: auto;
+  overflow-y: hidden;
+  max-width: 100%;
+  padding-bottom: 2px;
+}
+
+.katex-display {
+  margin: 0.5em 0 !important;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+.katex {
+  font-size: 1.05em;
+  text-rendering: auto;
+}
+
+/* Tùy biến nút chọn phương án A, B, C, D */
+.option-card {
+  transition: all 0.15s ease-in-out;
+}
+
+.option-card:hover {
+  transform: translateY(-1px);
+}
+
+.option-card:active {
+  transform: scale(0.99);
+}
+
+/* App Icon Squircle & Hover Effects */
+.subject-squircle {
+  border-radius: 22%;
+  position: relative;
+  transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+}
+
+.subject-squircle::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(135deg, rgba(255,255,255,0.3) 0%, rgba(255,255,255,0) 60%);
+  pointer-events: none;
+}
+
+.subject-app-item {
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.subject-app-item:hover .subject-squircle {
+  transform: translateY(-4px) scale(1.05);
+  box-shadow: 0 20px 30px -10px rgba(79, 70, 229, 0.35);
+}
+
+.subject-app-item:active .subject-squircle {
+  transform: scale(0.95);
+}
+
+/* Tab indicator */
+.tab-active {
+  border-bottom: 3px solid #4f46e5;
+  color: #4f46e5 !important;
+  font-weight: 700;
+}
+
+/* Drawer & Mobile Bottom Sheet */
+@media (max-width: 768px) {
+  .mobile-bottom-nav {
+    padding-bottom: env(safe-area-inset-bottom, 8px);
+  }
+}
+
+/* Định dạng in ấn (Print Stylesheet) cho đề thi và đề cương */
+@media print {
+  body {
+    background: white !important;
+    color: black !important;
+  }
+
+  header, nav, footer, .no-print, button, input[type="file"] {
+    display: none !important;
+  }
+
+  #outline-modal-content, #view-quiz-result {
+    display: block !important;
+    width: 100% !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  .border {
+    border-color: #ccc !important;
+  }
+}
